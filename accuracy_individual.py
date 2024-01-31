@@ -35,6 +35,7 @@ for angle in angle_mapping.values(): # range(1, 9)
     accuracies = []
     geometric_means = []
     g_means = []
+    
     # Set x-ticks and y-ticks for each subplot
     axs[angle_key - 1].set_xticks(physical_distances)  # X-ticks for physical distances
     axs[angle_key - 1].set_yticks(np.linspace(0, 100, 6))  # Y-ticks from 0 to 100 with intervals of 10%
@@ -62,17 +63,13 @@ for angle in angle_mapping.values(): # range(1, 9)
         # print('Accuracy:', accuracy)
         print('Accuracies length: ', len(accuracies))
         # print('Accuracies shape: ', accuracies)
-        # axs[angle_key - 1].scatter(distance_data['Physical Distance'][~condition], accuracy[~condition], marker = 'o', color='skyblue') # label=f'{physical_distance}m'
+        
         axs[angle_key - 1].scatter(distance_data['Physical Distance'][~condition], accuracy[~condition], marker = 'o', facecolors='none',edgecolors='cyan')
         axs[angle_key - 1].scatter(distance_data['Physical Distance'][condition], accuracy[condition], marker = 'o', facecolors='none',edgecolors='green') # label=f'{physical_distance}m'
 
         print('Over-estimation count: ', len(distance_data['Physical Distance'][condition]))
         print('Under-estimation count: ', len(distance_data['Physical Distance'][~condition]))
 
-        '''if accuracy.any() == 100:
-            geometric_mean = gmean(accuracy)
-        else:
-            geometric_mean = np.mean(accuracy)'''
         if (accuracy == 0).any(): #or (accuracy == 100).any():
             geometric_mean = np.mean(accuracy)
         else:
@@ -90,18 +87,6 @@ for angle in angle_mapping.values(): # range(1, 9)
         ) # label= f"Geometric Mean {angle_mapping[angle]}°"
         axs[angle_key - 1].annotate(f'{geometric_mean:.2f}', xy=(physical_distance, geometric_mean), ha='center', va='top', fontsize=10, color='black') # va='top' ha='center',
 
-        '''# Plotting perceived distances to see if it is matching with scatterplot_combined script
-        g_mean = gmean(distance_data['Perceived Distance'])
-        g_means.append(g_mean)
-        axs[angle_key - 1].scatter(
-            physical_distance,
-            g_mean,
-            marker="o",
-            s=100,
-            facecolors="none",
-            edgecolors="green"
-        ) # label= f"Geometric Mean {angle_mapping[angle]}°"
-        axs[angle_key - 1].annotate(f'{g_mean:.2f}', xy=(physical_distance, g_mean), ha='left', va='top', fontsize=10, color='black')'''
     # Set labels and title for the subplot
     axs[angle_key - 1].set_title(f"Angle {angle}°", fontsize=18) # {angle_mapping[angle]}
     axs[angle_key - 1].set_xlabel("Physical Distance (m)")
