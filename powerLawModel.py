@@ -113,59 +113,6 @@ for angle, ax in zip(angle_mapping.values(), axs):
 
 print('xdata size: ',x_data)
 print('r_squared_values: ', r_squared_values)
-'''# Create a combined plot for distributions
-fig_combined, axs_combined = plt.subplots(2, 2, figsize=(20, 12))
-
-# Add legend to distribution plots
-def add_legend(ax, data, label):
-    mean = np.mean(data)
-    std = np.std(data)
-    median = np.median(data)
-    q1, q3 = np.percentile(data, [25, 75])
-    legend_text = f'{label}\nMean: {mean:.2f} ± {std:.2f}\nMedian: {median:.2f} (IQR: {q1:.2f}-{q3:.2f})'
-    ax.legend([legend_text])
-
-# Plot distribution of R² values
-axs_combined[0, 0].hist(r_squared_values, bins=20, color='blue', alpha=0.7)
-axs_combined[0, 0].set_title('Distribution of R² values', fontsize=18)
-axs_combined[0, 0].set_xlabel('R²')
-axs_combined[0, 0].set_ylabel('Frequency')
-add_legend(axs_combined[0, 0], r_squared_values, 'R²')
-
-# Plot distribution of exponent (a) values
-axs_combined[0, 1].hist(exponent_values, bins=20, color='green', alpha=0.7)
-axs_combined[0, 1].set_title('Distribution of Exponent (a) values', fontsize=18)
-axs_combined[0, 1].set_xlabel('Exponent (a)')
-axs_combined[0, 1].set_ylabel('Frequency')
-add_legend(axs_combined[0, 1], exponent_values, 'Exponent (a)')
-
-# Plot distribution of constant (k) values
-axs_combined[1, 0].hist(constant_values, bins=20, color='red', alpha=0.7)
-axs_combined[1, 0].set_title('Distribution of Constants (k)', fontsize=18)
-axs_combined[1, 0].set_xlabel('Constant (k)')
-axs_combined[1, 0].set_ylabel('Frequency')
-add_legend(axs_combined[1, 0], constant_values, 'Constant (k)')
-
-# Plot Log-transformed residuals and RMS error
-axs_combined[1, 1].scatter(x_data, np.log(residuals), marker='o', facecolors='none', edgecolors='black')
-axs_combined[1, 1].set_title('Log-transformed Residuals and RMS error', fontsize=18)
-axs_combined[1, 1].set_xlabel('Physical distance (m)')
-axs_combined[1, 1].set_ylabel('Log-transformed Residuals')
-# axs_combined[1, 1].legend()
-
-print('residuals size: ',len(residuals))
-print('residuals values size: ',len(residuals_values))
-# Calculate RMS error
-rms_error = np.sqrt(np.mean(pow(residuals,2)))
-axs_combined[1, 1].text(0.5, 0.9, f'RMS Error: {rms_error:.2f}', transform=axs_combined[1, 1].transAxes, fontsize=14, ha='center')
-
-# Set custom x-axis ticks
-custom_xticks = np.arange(min(x_data), max(x_data) + 1, 1)  # Customize this range as needed
-axs_combined[1, 1].set_xticks(custom_xticks)
-
-# Set custom y-axis ticks
-custom_yticks = np.arange(-5, 5, 1)  # Customize this range as needed
-axs_combined[1, 1].set_yticks(custom_yticks) '''
 
 # Adjust layout
 plt.tight_layout() #rect=[0, 0, 1, 0.96]
